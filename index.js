@@ -10,6 +10,7 @@ controls.addEventListener('click', (e) => {
         screen.classList.remove('res')
         screen.innerText = ''
     }
+    console.log(screen.innerText == '.')
     let verify = screen.innerText.includes('+') || screen.innerText.includes('-')||screen.innerText.includes('x')||screen.innerText.includes('÷')
     
     switch (e.target.classList.value) {
