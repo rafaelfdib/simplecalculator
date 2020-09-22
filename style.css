@@ -1,0 +1,78 @@
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+#content{
+  background-color:whitesmoke;
+  padding: .5em;
+  width: 450px;
+
+}
+#screen{
+    height: 2em;
+    width: 80%;
+    border: 1px;
+    border-style: solid;
+    border-radius: 10px;
+    background-color: rgb(233, 231, 231);
+    margin: 0.5em 10%;
+    font-size: 3em;
+    padding: .5em;
+    text-align: right;
+}
+#controls{
+    width: 80%;
+    margin: 0.5em 10%;
+}
+.line button:last-of-type{
+    margin-right: 0;
+}
+button{
+    height: 1.5em;
+    width: 16%;
+    border: 1px;
+    border-style: solid;
+    border-radius: 10px;
+    background-color: cadetblue;
+    margin: 0.5em 2% 2% .5em  ;
+    font-size: 3em;
+}
+
+button:hover{
+    background-color: rgb(107, 158, 160);
+    transform: scale(1.1);
+    box-shadow: 0.05em 0.05em 0.1em;
+}
+
+.operator{
+    background-color: crimson;
+}
+.operator:hover{
+    background-color: rgb(197, 20, 55);
+}
+
+.result{
+    width: 62%;
+    background-color: crimson;
+}
+.result:hover{
+    background-color: rgb(197, 20, 55);
+    transform: scale(1.05);
+}
+
+.system{
+    color: whitesmoke;
+    background-color: slategrey;
+}
+.system:hover{
+    background-color: rgb(102, 116, 131);
+}
