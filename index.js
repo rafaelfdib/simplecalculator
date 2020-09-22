@@ -37,6 +37,29 @@ controls.addEventListener('click', (e) => {
             if(!result) screen.innerText= 0
             screen.classList.add('res');
             break; 
+
+        case "system":
+
+                switch (e.target.innerText) {
+                    case '.':
+                        if(!screen.innerText.includes('.'))
+                            screen.innerText += e.target.innerText ;
+                        break;
+
+                    case 'C':
+                        
+                        screen.innerText = '';
+                        break;
+                    case 'CA':
+                        screen.innerText = '';
+                        memory = [];
+                        break;
+                
+                    default:
+                        break;
+                }
+                    
+            break;
         case 'operator':
            
             switch (e.target.innerText) {
@@ -85,28 +108,7 @@ controls.addEventListener('click', (e) => {
     
          
         
-        case "system":
-
-                switch (e.target.innerText) {
-                    case '.':
-                        if(!screen.innerText.includes('.'))
-                            screen.innerText += e.target.innerText ;
-                        break;
-
-                    case 'C':
-                        
-                        screen.innerText = '';
-                        break;
-                    case 'CA':
-                        screen.innerText = '';
-                        memory = [];
-                        break;
-                
-                    default:
-                        break;
-                }
-                    
-            break;
+        
 
         default:
 
