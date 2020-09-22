@@ -27,7 +27,7 @@ controls.addEventListener('click', (e) => {
             break;
             case 'result':
             
-            if(!screen.innerText ==='.') memory.push(screen.innerText)
+            if(!screen.innerText =='.') memory.push(screen.innerText)
              let result = memory.map((v)=>{
                 if(v === "x") return '*';
                 if(v === "÷") return '\/';
@@ -64,7 +64,7 @@ controls.addEventListener('click', (e) => {
            
             switch (e.target.innerText) {
                 case "+":
-                    if(verify||screen.innerText ==='.'){
+                    if(verify||screen.innerText =='.'){
                         screen.innerText = '+';
                         break;
                     } ;
@@ -73,7 +73,7 @@ controls.addEventListener('click', (e) => {
                     break;
                 
                 case "x":
-                    if(verify||screen.innerText ==='.'){
+                    if(verify||screen.innerText =='.'){
                         screen.innerText = 'x';
                         break;
                     } ;
@@ -81,7 +81,7 @@ controls.addEventListener('click', (e) => {
                     screen.innerText = 'x';               
                     break;
                 case "÷":
-                    if(verify||screen.innerText ==='.'){
+                    if(verify||screen.innerText =='.'){
                         screen.innerText = '÷';
                         break;
                     } ;                    
@@ -90,7 +90,7 @@ controls.addEventListener('click', (e) => {
                     break; 
                 
                 case "-":
-                    if(verify||screen.innerText ==='.'){
+                    if(verify||screen.innerText =='.'){
                         screen.innerText = '-';
                         break;
                     } ;                    
