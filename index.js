@@ -3,6 +3,7 @@ let controls = document.querySelector('#controls');
 let memory = [];
 let operatorsOrigin = ["÷", "x", "+", '-'];
 let operators = ["\/", "*", "+", '-'];
+let lastResult = 0;
 
 controls.addEventListener('click', (e) => {
     e.preventDefault();
@@ -16,32 +17,52 @@ controls.addEventListener('click', (e) => {
 
     switch (e.target.classList.value) {
         case 'number':
+
             if (memory.length > 1) {
-                console.log(!isNaN(screen.innerText));
-                if (!isNaN(screen.innerText))
+                if (lastResult != 0) {
                     memory = [];
+                    lastResult = 0;
+                }
                 if (verify) {
                     memory.push(screen.innerText);
                     screen.innerText = ''
                     if (screen.innerText.includes('.') ? screen.innerText.length < 9 : screen.innerText.length < 8)
                         screen.innerText += e.target.innerText;
-                }else{
+                } else {
                     screen.innerText = ''
                     screen.innerText += e.target.innerText;
                 };
                 break
-            }
-            if (verify) {
-                memory.push(screen.innerText);
-                screen.innerText = ''
-                if (screen.innerText.includes('.') ? screen.innerText.length < 9 : screen.innerText.length < 8)
-                    screen.innerText += e.target.innerText;
-                break;
-            };
-            if (screen.innerText.includes('.') ? screen.innerText.length < 9 : screen.innerText.length < 8)
-                screen.innerText += e.target.innerText;
+            } else {
+                if (lastResult != 0) {
+                    if (verify) {
+                        lastResult = 0;
+                        memory.push(screen.innerText);
+                        screen.innerText = ''
+                        if (screen.innerText.includes('.') ? screen.innerText.length < 9 : screen.innerText.length < 8)
+                            screen.innerText += e.target.innerText;
 
-            break;
+                    } else {
+                        memory = [];
+                        
+                    };
+
+                } else {
+                    if (verify) {
+                        memory.push(screen.innerText);
+                        screen.innerText = ''
+                        if (screen.innerText.includes('.') ? screen.innerText.length < 9 : screen.innerText.length < 8)
+                            screen.innerText += e.target.innerText;
+                        break;
+                    };
+                    if (screen.innerText.includes('.') ? screen.innerText.length < 9 : screen.innerText.length < 8)
+                        screen.innerText += e.target.innerText;
+
+                }
+
+                break;
+            }
+
         case 'result':
 
             if (screen.innerText == '.') {
@@ -73,8 +94,8 @@ controls.addEventListener('click', (e) => {
 
                 })
                 .join("")
-            console.log(result);
-            screen.innerText = eval(result); // in this may be ok use eval
+            lastResult = eval(result); // in this may be ok use eval
+            screen.innerText = lastResult
             if (!result) screen.innerText = 0
             screen.classList.add('res');
             break;
@@ -102,7 +123,7 @@ controls.addEventListener('click', (e) => {
 
             break;
         case 'operator':
-
+            lastResult = 0;
             switch (e.target.innerText) {
                 case "+":
                     if (verify || screen.innerText == '.' || screen.innerText == '') {
