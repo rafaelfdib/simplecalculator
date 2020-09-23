@@ -4,6 +4,8 @@ let memory = [];
 let operatorsOrigin = ["÷", "x", "+", '-'];
 let operators = ["\/", "*", "+", '-'];
 let lastResult = 0;
+let forPercent = 0;
+let godHelpMe = false;
 
 controls.addEventListener('click', (e) => {
     e.preventDefault();
@@ -29,11 +31,15 @@ controls.addEventListener('click', (e) => {
                     if (screen.innerText.includes('.') ? screen.innerText.length < 9 : screen.innerText.length < 8)
                         screen.innerText += e.target.innerText;
                 } else {
-                    screen.innerText = ''
-                    screen.innerText += e.target.innerText;
+                    if (godHelpMe) {
+                        screen.innerText = '';
+                        godHelpMe = false
+                    }
+                    if (screen.innerText.includes('.') ? screen.innerText.length < 9 : screen.innerText.length < 8)
+                        screen.innerText += e.target.innerText;
                 };
                 break
-            } else {
+            } else if (memory.length == 1) {
                 if (lastResult != 0) {
                     if (verify) {
                         lastResult = 0;
@@ -43,8 +49,12 @@ controls.addEventListener('click', (e) => {
                             screen.innerText += e.target.innerText;
 
                     } else {
+                        if (godHelpMe) {
+                            screen.innerText = '';
+                            godHelpMe = false
+                        }
                         memory = [];
-                        
+
                     };
 
                 } else {
@@ -55,9 +65,32 @@ controls.addEventListener('click', (e) => {
                             screen.innerText += e.target.innerText;
                         break;
                     };
+                    if (screen.innerText.includes('.') ? screen.innerText.length < 9 : screen.innerText.length < 8) {
+                        if (godHelpMe) {
+                            screen.innerText = '';
+                            godHelpMe = false
+                        }
+                        screen.innerText += e.target.innerText;
+                    }
+
+                }
+
+                break;
+            } else if (memory.length == 0) {
+                if (verify) {
+                    memory.push(screen.innerText);
+                    screen.innerText = ''
                     if (screen.innerText.includes('.') ? screen.innerText.length < 9 : screen.innerText.length < 8)
                         screen.innerText += e.target.innerText;
-
+                    break;
+                };
+                if (screen.innerText.includes('.') ? screen.innerText.length < 9 : screen.innerText.length < 8) {
+                    if (godHelpMe) {
+                        screen.innerText = '';
+                        godHelpMe = false
+                    }
+                    screen.innerText += e.target.innerText;
+                    break;
                 }
 
                 break;
@@ -123,7 +156,22 @@ controls.addEventListener('click', (e) => {
 
             break;
         case 'operator':
-            lastResult = 0;
+            forPercent = lastResult
+            
+            if (godHelpMe) {
+                screen.innerText = '';
+                memory = []
+                memory.push(forPercent)
+                godHelpMe = false
+            };
+            if(lastResult != 0){
+                screen.innerText = '';
+                memory = []
+                memory.push(lastResult)
+                lastResult = 0;
+            }
+                
+            
             switch (e.target.innerText) {
                 case "+":
                     if (verify || screen.innerText == '.' || screen.innerText == '') {
@@ -169,8 +217,16 @@ controls.addEventListener('click', (e) => {
                     break;
 
                 case "%":
-                    if (!isNaN(screen.innerText))
-                        screen.innerText = screen.innerText / 100;
+                    if (forPercent != 0) {
+
+                        screen.innerText = forPercent / 100
+                        lastResult = forPercent / 100
+                        godHelpMe = true
+
+                    } else if (!isNaN(screen.innerText))
+                        lastResult = screen.innerText / 100;
+                    screen.innerText = lastResult;
+                    godHelpMe = true
                     break;
 
                 default:
