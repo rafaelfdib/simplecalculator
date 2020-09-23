@@ -1,115 +1,164 @@
 let screen = document.querySelector('#screen');
 let controls = document.querySelector('#controls');
 let memory = [];
+let operatorsOrigin = ["÷", "x", "+", '-'];
+let operators = ["\/", "*", "+", '-'];
+
 controls.addEventListener('click', (e) => {
     e.preventDefault();
-    /* new Promise( (resolve, reject){
 
-    }) */
-    if (screen.classList.contains('res')){
+    if (screen.classList.contains('res')) {
         screen.classList.remove('res')
         screen.innerText = ''
     }
-    console.log(screen.innerText == '.')
-    let verify = screen.innerText.includes('+') || screen.innerText.includes('-')||screen.innerText.includes('x')||screen.innerText.includes('÷')
-    
+
+    let verify = screen.innerText.includes('+') || screen.innerText.includes('-') || screen.innerText.includes('x') || screen.innerText.includes('÷')
+
     switch (e.target.classList.value) {
         case 'number':
-            if(verify) {
+            if (memory.length > 1) {
+                console.log(!isNaN(screen.innerText));
+                if (!isNaN(screen.innerText))
+                    memory = [];
+                if (verify) {
+                    memory.push(screen.innerText);
+                    screen.innerText = ''
+                    if (screen.innerText.includes('.') ? screen.innerText.length < 9 : screen.innerText.length < 8)
+                        screen.innerText += e.target.innerText;
+                }else{
+                    screen.innerText = ''
+                    screen.innerText += e.target.innerText;
+                };
+                break
+            }
+            if (verify) {
                 memory.push(screen.innerText);
                 screen.innerText = ''
-            if(screen.innerText.includes('.') ? screen.innerText.length < 9 : screen.innerText.length < 8)
-                screen.innerText += e.target.innerText ;
+                if (screen.innerText.includes('.') ? screen.innerText.length < 9 : screen.innerText.length < 8)
+                    screen.innerText += e.target.innerText;
                 break;
             };
-            if(screen.innerText.includes('.') ? screen.innerText.length < 9 : screen.innerText.length < 8)
-                screen.innerText += e.target.innerText ;
+            if (screen.innerText.includes('.') ? screen.innerText.length < 9 : screen.innerText.length < 8)
+                screen.innerText += e.target.innerText;
 
             break;
-            case 'result':
-            
-            if(!screen.innerText =='.') memory.push(screen.innerText)
-             let result = memory.map((v)=>{
-                if(v === "x") return '*';
-                if(v === "÷") return '\/';
-                return v
-            }).join("")
-            screen.innerText= eval(result); // in this may be ok use eval
-            if(!result) screen.innerText= 0
+        case 'result':
+
+            if (screen.innerText == '.') {
+
+            } else {
+                memory.push(screen.innerText)
+            }
+            let result = memory
+                .map((v, i, arr) => {
+                    if (operatorsOrigin.includes(arr[i - 1]) && operatorsOrigin.includes(v)) return '';
+                    if (operatorsOrigin.includes(v) && i == (arr.length - 1)) return '';
+                    if (v === "x") return '*';
+                    if (v === "÷") return '\/';
+                    if (v === ".") return '';
+
+                    return v
+                })
+                .map((v, i, arr) => {
+                    if (operators.includes(v)) {
+                        if (!arr.slice(i + 1).some(x => x != '')) {
+                            return ''
+                        } else {
+                            return v
+                        }
+                    } else {
+                        return v
+                    }
+
+
+                })
+                .join("")
+            console.log(result);
+            screen.innerText = eval(result); // in this may be ok use eval
+            if (!result) screen.innerText = 0
             screen.classList.add('res');
-            break; 
+            break;
 
         case "system":
 
-                switch (e.target.innerText) {
-                    case '.':
-                        if(!screen.innerText.includes('.'))
-                            screen.innerText += e.target.innerText ;
-                        break;
-
-                    case 'C':
-                        
-                        screen.innerText = '';
-                        break;
-                    case 'CA':
-                        screen.innerText = '';
-                        memory = [];
-                        break;
-                
-                    default:
-                        break;
-                }
-                    
-            break;
-        case 'operator':
-           
             switch (e.target.innerText) {
-                case "+":
-                    if(verify||screen.innerText =='.'){
-                        screen.innerText = '+';
-                        break;
-                    } ;
-                    memory.push(screen.innerText);
-                    screen.innerText = '+';
+                case '.':
+                    if (!(screen.innerText.includes('.') || verify))
+                        screen.innerText += e.target.innerText;
                     break;
-                
-                case "x":
-                    if(verify||screen.innerText =='.'){
-                        screen.innerText = 'x';
-                        break;
-                    } ;
-                    memory.push(screen.innerText);
-                    screen.innerText = 'x';               
+
+                case 'C':
+
+                    screen.innerText = '';
                     break;
-                case "÷":
-                    if(verify||screen.innerText =='.'){
-                        screen.innerText = '÷';
-                        break;
-                    } ;                    
-                    memory.push(screen.innerText);
-                    screen.innerText = '÷';  
-                    break; 
-                
-                case "-":
-                    if(verify||screen.innerText =='.'){
-                        screen.innerText = '-';
-                        break;
-                    } ;                    
-                    memory.push(screen.innerText);
-                    screen.innerText = '-';  
-                    break;
-                
-                case "%":
-                    screen.innerText = screen.innerText/100;
+                case 'CA':
+                    screen.innerText = '';
+                    memory = [];
                     break;
 
                 default:
                     break;
             }
-    
-         
-        
-        
+
+            break;
+        case 'operator':
+
+            switch (e.target.innerText) {
+                case "+":
+                    if (verify || screen.innerText == '.' || screen.innerText == '') {
+                        screen.innerText = '+';
+                        break;
+                    };
+                    memory.push(screen.innerText);
+                    screen.innerText = '+';
+                    break;
+
+                case "x":
+                    if (memory.length == 0 && screen.innerText == '') {
+
+                        break
+                    };
+                    if (verify || screen.innerText == '.' || screen.innerText == '') {
+                        screen.innerText = 'x';
+                        break;
+                    };
+                    memory.push(screen.innerText);
+                    screen.innerText = 'x';
+                    break;
+                case "÷":
+                    if (memory.length == 0 && screen.innerText == '') {
+
+                        break
+                    };
+                    if (verify || screen.innerText == '.' || screen.innerText == '') {
+                        screen.innerText = '÷';
+                        break;
+                    };
+                    memory.push(screen.innerText);
+                    screen.innerText = '÷';
+                    break;
+
+                case "-":
+                    if (verify || screen.innerText == '.' || screen.innerText == '') {
+                        screen.innerText = '-';
+                        break;
+                    };
+                    memory.push(screen.innerText);
+                    screen.innerText = '-';
+                    break;
+
+                case "%":
+                    if (!isNaN(screen.innerText))
+                        screen.innerText = screen.innerText / 100;
+                    break;
+
+                default:
+                    break;
+            }
+
+
+
+
 
         default:
 
