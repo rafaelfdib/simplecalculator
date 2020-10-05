@@ -107,6 +107,7 @@ controls.addEventListener('click', (e) => {
     } else if (val == 'operator') {
 
         verifyMemory()
+        clearView()
         updateView(engine[val][metaData](memory[0], memory[1]));
         clearMemory()
         clearInNextMove = true;
