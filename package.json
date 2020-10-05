@@ -1,0 +1,20 @@
+{
+  "name": "simplecalculator",
+  "version": "1.0.0",
+  "description": "A simple calculator",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafaelfdib/simplecalculator.git"
+  },
+  "author": "Rafael Ferrari Dib",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rafaelfdib/simplecalculator/issues"
+  },
+  "homepage": "https://github.com/rafaelfdib/simplecalculator#readme"
+}

@@ -12,26 +12,30 @@ html {
 }
 
 #content{
-  background-color:whitesmoke;
+  background-image: linear-gradient(to right, grey, whitesmoke,whitesmoke,whitesmoke, grey);
   padding: .5em;
   width: 450px;
+  border-radius: 10px;
+  box-shadow: 0.05em 0.05em 1em;
+  margin: 0.5em auto;
 
 }
 #screen{
     height: 2em;
-    width: 80%;
+    width: 70%;
     border: 1px;
     border-style: solid;
     border-radius: 10px;
     background-color: rgb(233, 231, 231);
-    margin: 0.5em 10%;
+    margin: 0.5em 17% 0.5em 13%;
     font-size: 3em;
     padding: .5em;
     text-align: right;
+    box-shadow: 0.05em 0.05em 0.1em inset;
 }
 #controls{
     width: 80%;
-    margin: 0.5em 10%;
+    margin: 0.5em auto;
 }
 .line button:last-of-type{
     margin-right: 0;
@@ -45,6 +49,7 @@ button{
     background-color: cadetblue;
     margin: 0.5em 2% 2% .5em  ;
     font-size: 3em;
+    cursor: pointer;
 }
 
 button:hover{
@@ -52,6 +57,8 @@ button:hover{
     transform: scale(1.1);
     box-shadow: 0.05em 0.05em 0.1em;
 }
+
+
 
 .operator{
     background-color: crimson;
@@ -61,7 +68,7 @@ button:hover{
 }
 
 .result{
-    width: 42%;
+    width: 40%;
     background-color: crimson;
 }
 .result:hover{
@@ -75,4 +82,13 @@ button:hover{
 }
 .system:hover{
     background-color: rgb(102, 116, 131);
+}
+
+.enter{
+    width: 40%;
+    background-color: green;
+}
+
+.enter:hover{
+   background-color: rgb(2, 112, 2); 
 }

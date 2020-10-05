@@ -1,52 +1,54 @@
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<div id="content">
-<section id='screen'></section>
-<section id='controls'>
-    <div class="line">
+    <div id="content">
+        <section id='screen'></section>
+        <section id='controls'>
+            <div class="line">
 
+            </div>
+            <div class="line">
+                <button class="number" meta-data="1">1</button>
+                <button class="number" meta-data="2">2</button>
+                <button class="number" meta-data="3">3</button>
+                <button class="operator" meta-data="sum">+</button>
+            </div>
+            <div class="line">
+                <button class="number" meta-data="4">4</button>
+                <button class="number" meta-data="5">5</button>
+                <button class="number" meta-data="6">6</button>
+                <button class="operator" meta-data="subtraction">-</button>
+            </div>
+            <div class="line">
+                <button class="number" meta-data="7">7</button>
+                <button class="number" meta-data="8">8</button>
+                <button class="number" meta-data="9">9</button>
+                <button class="operator" meta-data="division">÷</button>
+            </div>
+            <div class="line">
+                <button class="number" meta-data="0">0</button>
+                <button class="system" meta-data="clear">C</button>
+                <button class="system" meta-data="clearAll">CA</button>
+                <button class="operator" meta-data="multiplication">x</button>
+            </div>
+            <div class="line">
+                <button class="operator" meta-data="percentage">%</button>
+                <button class="system" meta-data="dot">.</button>
+                <button class="enter" meta-data="enter">Enter</button>
+            </div>
+
+        </section>
     </div>
-    <div class="line">
-           <button class="number">1</button>
-    <button class="number">2</button>
-    <button class="number">3</button>
-    <button class="operator">+</button>
-    </div>
-    <div class="line">
-         <button class="number">4</button>
-    <button class="number">5</button>
-    <button class="number">6</button>
-    <button class="operator">-</button>
-    </div>
-    <div class="line">
-           <button class="number">7</button>
-    <button class="number">8</button>
-    <button class="number">9</button>
-    <button class="operator">÷</button> 
-    </div>
-    <div class="line">
-    <button class="number">0</button>        
-    <button class="system">C</button>
-    <button class="system">CA</button>
-    <button class="operator">x</button>
-    </div>
-  <div class="line">
-      <button class="operator">%</button>
-        <button class="system">.</button>
-    <button class="result">=</button>
-    </div>
-   
+    <script src="app.js"></script>
 
 
-    
-</section>
-</div> 
-<script src="index.js"></script>
 </body>
+
 </html>

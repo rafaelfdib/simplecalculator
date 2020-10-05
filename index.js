@@ -9,7 +9,8 @@ let godHelpMe = false;
 
 controls.addEventListener('click', (e) => {
     e.preventDefault();
-
+    console.log('memory:', memory, 'target:', e.target);
+    console.log(`lastResult: ${lastResult}, forPercent: ${forPercent}, godHelpMe: ${godHelpMe} `);
     if (screen.classList.contains('res')) {
         screen.classList.remove('res')
         screen.innerText = ''
@@ -20,6 +21,11 @@ controls.addEventListener('click', (e) => {
     switch (e.target.classList.value) {
         case 'number':
 
+            if (godHelpMe) {
+                screen.innerText = '';
+                godHelpMe = false
+                lastResult = 0
+            }
             if (memory.length > 1) {
                 if (lastResult != 0) {
                     memory = [];
@@ -34,9 +40,13 @@ controls.addEventListener('click', (e) => {
                     if (godHelpMe) {
                         screen.innerText = '';
                         godHelpMe = false
+                        if (screen.innerText.includes('.') ? screen.innerText.length < 9 : screen.innerText.length < 8)
+                            screen.innerText += e.target.innerText;
+                    } else {
+                        if (screen.innerText.includes('.') ? screen.innerText.length < 9 : screen.innerText.length < 8)
+                            screen.innerText += e.target.innerText;
                     }
-                    if (screen.innerText.includes('.') ? screen.innerText.length < 9 : screen.innerText.length < 8)
-                        screen.innerText += e.target.innerText;
+
                 };
                 break
             } else if (memory.length == 1) {
@@ -52,8 +62,14 @@ controls.addEventListener('click', (e) => {
                         if (godHelpMe) {
                             screen.innerText = '';
                             godHelpMe = false
+                            if (screen.innerText.includes('.') ? screen.innerText.length < 9 : screen.innerText.length < 8)
+                                screen.innerText += e.target.innerText;
+                            memory = [];
+                        } else {
+                            if (screen.innerText.includes('.') ? screen.innerText.length < 9 : screen.innerText.length < 8)
+                                screen.innerText += e.target.innerText;
+                            memory = [];
                         }
-                        memory = [];
 
                     };
 
@@ -69,12 +85,16 @@ controls.addEventListener('click', (e) => {
                         if (godHelpMe) {
                             screen.innerText = '';
                             godHelpMe = false
+                            if (screen.innerText.includes('.') ? screen.innerText.length < 9 : screen.innerText.length < 8)
+                                screen.innerText += e.target.innerText;
+                        } else {
+                            if (screen.innerText.includes('.') ? screen.innerText.length < 9 : screen.innerText.length < 8)
+                                screen.innerText += e.target.innerText;
                         }
-                        screen.innerText += e.target.innerText;
                     }
 
                 }
-
+                lastResult = 0
                 break;
             } else if (memory.length == 0) {
                 if (verify) {
@@ -88,6 +108,7 @@ controls.addEventListener('click', (e) => {
                     if (godHelpMe) {
                         screen.innerText = '';
                         godHelpMe = false
+                        screen.innerText += e.target.innerText;
                     }
                     screen.innerText += e.target.innerText;
                     break;
@@ -147,6 +168,9 @@ controls.addEventListener('click', (e) => {
                     break;
                 case 'CA':
                     screen.innerText = '';
+                    lastResult = 0;
+                    forPercent = 0;
+                    godHelpMe = false;
                     memory = [];
                     break;
 
@@ -156,22 +180,30 @@ controls.addEventListener('click', (e) => {
 
             break;
         case 'operator':
+
             forPercent = lastResult
-            
+
             if (godHelpMe) {
+
                 screen.innerText = '';
                 memory = []
                 memory.push(forPercent)
+                forPercent = 0
+                lastResult = 0
                 godHelpMe = false
+                console.log("operator");
+                console.log('memory:', memory, 'target:', e.target);
+                console.log(`lastResult: ${lastResult}, forPercent: ${forPercent}, godHelpMe: ${godHelpMe} `);
+
             };
-            if(lastResult != 0){
+            if (lastResult != 0) {
                 screen.innerText = '';
                 memory = []
                 memory.push(lastResult)
                 lastResult = 0;
             }
-                
-            
+
+
             switch (e.target.innerText) {
                 case "+":
                     if (verify || screen.innerText == '.' || screen.innerText == '') {
@@ -223,10 +255,12 @@ controls.addEventListener('click', (e) => {
                         lastResult = forPercent / 100
                         godHelpMe = true
 
-                    } else if (!isNaN(screen.innerText))
+                    } else if (!isNaN(screen.innerText)){
                         lastResult = screen.innerText / 100;
                     screen.innerText = lastResult;
                     godHelpMe = true
+                    }
+
                     break;
 
                 default:
