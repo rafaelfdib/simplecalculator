@@ -105,14 +105,14 @@ controls.addEventListener('click', (e) => {
         }
         engine[val](metaData);
     } else if (val == 'operator') {
-
+        engine['enter'](parseFloat(getViewValue()));
         verifyMemory()
-        clearView()
         updateView(engine[val][metaData](memory[0], memory[1]));
         clearMemory()
         clearInNextMove = true;
     } else {
-        engine[val][metaData]();
+        if(metaData)
+            engine[val][metaData]();
     }
 
 });
